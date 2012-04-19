@@ -1,0 +1,13 @@
+Source: flashtest
+Section: user/office
+Priority: extra
+Maintainer: Ilya Skriblovsky <Ilya.Skriblovsky@gmail.com>
+Build-Depends: debhelper (>= 7), libfcam-dev
+Standards-Version: 3.8.4
+
+Package: flashtest
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: flash test
+Version: 0.0.`
+XSBC-Maemo-Display-Name: FlashTest
