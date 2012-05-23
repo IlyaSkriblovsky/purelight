@@ -1,6 +1,8 @@
 #include <cstdio>
 #include <cstring>
 
+#include <pthread.h>
+#include <signal.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
@@ -19,21 +21,32 @@ enum v4l2_flash_led_mode {
 };
 
 
-#include <X11/Xlib.h>
+
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+bool stopped;
+
+
+void sig_stop(int)
+{
+    printf("Stop signal received\n");
+
+    pthread_mutex_lock(&mutex);
+    stopped = true;
+    pthread_cond_signal(&cond);
+    pthread_mutex_unlock(&mutex);
+}
+
+
 
 int main()
 {
-    Display* d = XOpenDisplay(0);
-    Window root = RootWindow(d, DefaultScreen(d));
-    Window w = XCreateSimpleWindow(
-        d, root, 10, 10, 100, 100, 0, 0, 0
-    );
-    XMapWindow(d, w);
-    XSync(d, 0);
-    XUnmapWindow(d, w);
-    XSync(d, 0);
-    XDestroyWindow(d, w);
-    XSync(d, 0);
+    pthread_mutex_init(&mutex, NULL);
+    pthread_cond_init(&cond, NULL);
+
+    signal(SIGINT, sig_stop);
+    signal(SIGTERM, sig_stop);
+    printf("Signals set\n");
 
     int fd = open("/dev/v4l-subdev10", O_RDWR | O_NONBLOCK, 0);
     if (fd == -1)
@@ -43,6 +56,7 @@ int main()
     }
 
     v4l2_control mode_ctrl;
+
     mode_ctrl.id = V4L2_CID_FLASH_LED_MODE;
     mode_ctrl.value = V4L2_FLASH_LED_MODE_TORCH;
     if (ioctl(fd, VIDIOC_S_CTRL, &mode_ctrl) == -1)
@@ -51,5 +65,25 @@ int main()
         return 1;
     }
 
-    sleep(60);
+
+    pthread_mutex_lock(&mutex);
+    stopped = false;
+    while (! stopped)
+        pthread_cond_wait(&cond, &mutex);
+    pthread_mutex_unlock(&mutex);
+
+    printf("Stopping\n");
+
+
+    mode_ctrl.id = V4L2_CID_FLASH_LED_MODE;
+    mode_ctrl.value = V4L2_FLASH_LED_MODE_NONE;
+    if (ioctl(fd, VIDIOC_S_CTRL, &mode_ctrl) == -1)
+    {
+        fprintf(stderr, "Can't set (%s)\n", strerror(errno));
+        return 1;
+    }
+
+
+    pthread_cond_destroy(&cond);
+    pthread_mutex_destroy(&mutex);
 }
