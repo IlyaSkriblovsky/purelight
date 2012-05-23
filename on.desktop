@@ -2,4 +2,4 @@
 Type=Application
 Name=FlashTest
 Exec=/bin/sh /opt/flashtest/startstop.sh
-Icon=icon-l-calculator
+Icon=flashtest-on

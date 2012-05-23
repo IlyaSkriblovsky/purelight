@@ -1,4 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=FlashTest
-Exec=/bin/sh /opt/flashtest/startstop.sh
