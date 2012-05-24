@@ -1,3 +1,4 @@
 #!/bin/sh
-cp /opt/purelight/off.desktop /usr/share/applications/purelight.desktop
+# cp /opt/purelight/off.desktop /usr/share/applications/purelight.desktop
 chmod 666 /usr/share/applications/purelight.desktop
+exit 0

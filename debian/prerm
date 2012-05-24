@@ -1,2 +1,4 @@
 #!/bin/sh
-rm /usr/share/applications/purelight.desktop
+# rm /usr/share/applications/purelight.desktop
+pkill purelight
+exit 0
