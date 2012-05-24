@@ -1,6 +1,6 @@
 #!/usr/bin/make -f
 
-APPNAME := flashtest
+APPNAME := purelight
 
 builddir:
 	mkdir -p builddir

@@ -7,25 +7,25 @@ LIBS = -lX11
 SOURCES = main.cpp
 
 
-target.path = /opt/flashtest/
+target.path = /opt/purelight/
 INSTALLS += target
 
 
 startstop.files = startstop.sh
-startstop.path = /opt/flashtest/
+startstop.path = /opt/purelight/
 INSTALLS += startstop
 
 
-desktop.files = flashtest.desktop
+desktop.files = purelight.desktop
 desktop.path = /usr/share/applications
 INSTALLS += desktop
 
 
 onoff.files = on.desktop off.desktop
-onoff.path = /opt/flashtest/
+onoff.path = /opt/purelight/
 INSTALLS += onoff
 
 
-icons.files = flashtest-on.png flashtest-off.png
+icons.files = purelight-on.png purelight-off.png
 icons.path = /usr/share/icons/hicolor/64x64/apps
 INSTALLS += icons

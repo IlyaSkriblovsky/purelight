@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
-Name=FlashTest
-Exec=/bin/sh /opt/flashtest/startstop.sh
-Icon=flashtest-off
+Name=PureLight
+Exec=/bin/sh /opt/purelight/startstop.sh
+Icon=purelight-off

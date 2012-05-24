@@ -1,2 +1,2 @@
 #!/bin/sh
-rm /usr/share/applications/flashtest.desktop
+rm /usr/share/applications/purelight.desktop

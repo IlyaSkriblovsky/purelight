@@ -1,13 +1,13 @@
-Source: flashtest
+Source: purelight
 Section: user/office
 Priority: extra
 Maintainer: Ilya Skriblovsky <Ilya.Skriblovsky@gmail.com>
 Build-Depends: debhelper (>= 7)
 Standards-Version: 3.8.4
 
-Package: flashtest
+Package: purelight
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: flash test
-Version: 0.0.`
-XSBC-Maemo-Display-Name: FlashTest
+Description: Simpliest flashlight application for MeeGo Harmattan
+Version: 1.0.0
+XSBC-Maemo-Display-Name: PureLight

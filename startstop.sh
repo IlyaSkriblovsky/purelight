@@ -1,10 +1,10 @@
 #!/bin/sh
 
-if pkill flashtest; then
+if pkill purelight; then
     echo "killed"
-    cat /opt/flashtest/off.desktop >/usr/share/applications/flashtest.desktop
+    cat /opt/purelight/off.desktop >/usr/share/applications/purelight.desktop
 else
     echo "starting"
-    cat /opt/flashtest/on.desktop >/usr/share/applications/flashtest.desktop
-    /opt/flashtest/flashtest
+    cat /opt/purelight/on.desktop >/usr/share/applications/purelight.desktop
+    /opt/purelight/purelight
 fi
